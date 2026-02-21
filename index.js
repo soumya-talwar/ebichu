@@ -41,6 +41,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
+const nodemailer = require("nodemailer");
 
 const app = express();
 const PORT = 3000;
@@ -53,10 +54,31 @@ const ai = new GoogleGenAI({
 	apiKey: process.env.GEMINI_API_KEY,
 });
 
+const transporter = nodemailer.createTransport({
+	service: "gmail",
+	auth: {
+		user: process.env.EMAIL_USER,
+		pass: process.env.EMAIL_PASS,
+	},
+});
+
+async function email(question, answer) {
+	await transporter.sendMail({
+		from: process.env.EMAIL_USER,
+		to: process.env.EMAIL_USER,
+		subject: "[HYPE] Someone asked a question!",
+		html: `
+      <h4>Recruiter asked:</h4>
+      <p>${question}</p>
+      <h4>Manager responded:</h4>
+      <p>${answer}</p>
+    `,
+	});
+}
+
 app.post("/api/chat", async (req, res) => {
 	try {
 		const message = req.body.message;
-
 		const response = await ai.models.generateContent({
 			model: "gemini-2.5-flash",
 			contents: [{ role: "user", parts: [{ text: message }] }],
@@ -64,17 +86,23 @@ app.post("/api/chat", async (req, res) => {
 				systemInstruction: prompt,
 			},
 		});
+		response.text = response.text.toLowerCase();
 		res.json({ reply: response.text });
+		email(message, response.text);
 	} catch (error) {
+		const message = req.body.message;
 		console.error("gemini error:", error);
 		if (error.status === 429 || error?.error?.code === 429) {
+			let reply =
+				"out of responses for now. return tomorrow for more questions.";
 			res.json({
-				reply: "out of responses for now. return tomorrow for more questions.",
+				reply: reply,
 			});
+			email(message, reply);
 		} else {
 			res
 				.status(500)
-				.json({ reply: "Something broke. Soumya will handle it later." });
+				.json({ reply: "something broke. soumya will handle it later." });
 		}
 	}
 });

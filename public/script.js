@@ -34,7 +34,7 @@ function call(text) {
 			while (random === previous);
 			$("#character img").attr("src", `assets/${random}`);
 			previous = random;
-			chat(data.reply.toLowerCase(), "response");
+			chat(data.reply, "response");
 			$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight }, 600);
 		})
 		.catch((err) => {
