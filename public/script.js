@@ -43,18 +43,6 @@ function call(text) {
 		});
 }
 
-function speak(text) {
-	const utter = new SpeechSynthesisUtterance(text);
-	utter.pitch = 2;
-	utter.rate = 1;
-	utter.volume = 1;
-	utter.voice = speechSynthesis
-		.getVoices()
-		.find((voice) => voice.name === "Google US English");
-	console.log(speechSynthesis.getVoices());
-	speechSynthesis.speak(utter);
-}
-
 $(document).ready(() => {
 	setTimeout(() => {
 		chat(
