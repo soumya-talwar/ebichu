@@ -17,7 +17,6 @@ function chat(text, type) {
 		</div>
 	</div>
 	`);
-	speak(text);
 }
 
 function call(text) {
