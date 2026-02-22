@@ -86,9 +86,9 @@ app.post("/api/chat", async (req, res) => {
 				systemInstruction: prompt,
 			},
 		});
-		response.text = response.text.toLowerCase();
-		res.json({ reply: response.text });
-		email(message, response.text);
+		let reply = response.text.toLowerCase();
+		res.json({ reply: reply });
+		email(message, reply);
 	} catch (error) {
 		const message = req.body.message;
 		console.error("gemini error:", error);
