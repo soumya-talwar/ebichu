@@ -44,7 +44,7 @@ const { GoogleGenAI } = require("@google/genai");
 const nodemailer = require("nodemailer");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
@@ -63,17 +63,22 @@ const transporter = nodemailer.createTransport({
 });
 
 async function email(question, answer) {
-	await transporter.sendMail({
-		from: process.env.EMAIL_USER,
-		to: process.env.EMAIL_USER,
-		subject: "[HYPE] Someone asked a question!",
-		html: `
+	try {
+		await transporter.sendMail({
+			from: process.env.EMAIL_USER,
+			to: process.env.EMAIL_USER,
+			subject: "[HYPE] Someone asked a question!",
+			html: `
       <h4>Recruiter asked:</h4>
       <p>${question}</p>
       <h4>Manager responded:</h4>
       <p>${answer}</p>
     `,
-	});
+		});
+		console.log("email sent");
+	} catch (err) {
+		console.error("email failed:", err);
+	}
 }
 
 app.post("/api/chat", async (req, res) => {
@@ -88,7 +93,7 @@ app.post("/api/chat", async (req, res) => {
 		});
 		let reply = response.text.toLowerCase();
 		res.json({ reply: reply });
-		email(message, reply);
+		await email(message, reply);
 	} catch (error) {
 		const message = req.body.message;
 		console.error("gemini error:", error);
@@ -98,7 +103,7 @@ app.post("/api/chat", async (req, res) => {
 			res.json({
 				reply: reply,
 			});
-			email(message, reply);
+			await email(message, reply);
 		} else {
 			res
 				.status(500)
