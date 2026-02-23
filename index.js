@@ -41,7 +41,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -54,41 +54,24 @@ const ai = new GoogleGenAI({
 	apiKey: process.env.GEMINI_API_KEY,
 });
 
-const transporter = nodemailer.createTransport({
-	host: "smtp.gmail.com",
-	port: 465,
-	secure: true,
-	family: 4,
-	auth: {
-		user: process.env.EMAIL_USER,
-		pass: process.env.EMAIL_PASS,
-	},
-});
-
-transporter.verify(function (error, success) {
-	if (error) {
-		console.error("Transporter verify failed:", error);
-	} else {
-		console.log("Server ready to send mail");
-	}
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function email(question, answer) {
 	try {
-		await transporter.sendMail({
-			from: process.env.EMAIL_USER,
+		await resend.emails.send({
+			from: "onboarding@resend.dev",
 			to: process.env.EMAIL_USER,
 			subject: "[HYPE] Someone asked a question!",
 			html: `
-      <h4>Recruiter asked:</h4>
-      <p>${question}</p>
-      <h4>Manager responded:</h4>
-      <p>${answer}</p>
-    `,
+        <h4>Recruiter asked:</h4>
+        <p>${question}</p>
+        <h4>Manager responded:</h4>
+        <p>${answer}</p>
+      `,
 		});
-		console.log("email sent");
+		console.log("Email sent successfully");
 	} catch (err) {
-		console.error("email failed:", err);
+		console.error("Email failed:", err);
 	}
 }
 
@@ -104,25 +87,21 @@ app.post("/api/chat", async (req, res) => {
 		});
 		let reply = response.text;
 		res.json({ reply: reply });
-		console.log("About to send email...");
+		console.log("about to send email...");
 		await email(message, reply);
-		console.log("Email function finished.");
+		console.log("email function finished.");
 	} catch (error) {
 		const message = req.body.message;
 		console.error("gemini error:", error);
 		if (error.status === 429 || error?.error?.code === 429) {
 			let reply =
-				"out of responses for now. return tomorrow for more questions.";
-			res.json({
-				reply: reply,
-			});
+				error.status === 429 || error?.error?.code === 429
+					? "out of responses for now. return tomorrow for more questions."
+					: "something broke. soumya will handle it later.";
+			res.json({ reply });
 			console.log("About to send email...");
 			await email(message, reply);
 			console.log("Email function finished.");
-		} else {
-			res
-				.status(500)
-				.json({ reply: "something broke. soumya will handle it later." });
 		}
 	}
 });
