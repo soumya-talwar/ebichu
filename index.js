@@ -87,9 +87,7 @@ app.post("/api/chat", async (req, res) => {
 		});
 		let reply = response.text;
 		res.json({ reply: reply });
-		console.log("about to send email...");
 		await email(message, reply);
-		console.log("email function finished.");
 	} catch (error) {
 		const message = req.body.message;
 		console.error("gemini error:", error);
@@ -99,9 +97,7 @@ app.post("/api/chat", async (req, res) => {
 					? "out of responses for now. return tomorrow for more questions."
 					: "something broke. soumya will handle it later.";
 			res.json({ reply });
-			console.log("About to send email...");
 			await email(message, reply);
-			console.log("Email function finished.");
 		}
 	}
 });
