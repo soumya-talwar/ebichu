@@ -45,7 +45,7 @@ function call(text) {
 $(document).ready(() => {
 	setTimeout(() => {
 		chat(
-			"i am soumya's manager, and she's brilliant. ask and see how.",
+			"I am Soumya's manager, and she's brilliant. Ask and see how.",
 			"response",
 		);
 		$("#chat").animate({ scrollTop: $("#chat")[0].scrollHeight }, 600);

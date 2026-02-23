@@ -55,7 +55,7 @@ const ai = new GoogleGenAI({
 });
 
 const transporter = nodemailer.createTransport({
-	service: "smtp.gmail.com",
+	host: "smtp.gmail.com",
 	port: 465,
 	secure: true,
 	auth: {
@@ -100,7 +100,7 @@ app.post("/api/chat", async (req, res) => {
 				systemInstruction: prompt,
 			},
 		});
-		let reply = response.text.toLowerCase();
+		let reply = response.text;
 		res.json({ reply: reply });
 		console.log("About to send email...");
 		await email(message, reply);
