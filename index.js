@@ -55,7 +55,9 @@ const ai = new GoogleGenAI({
 });
 
 const transporter = nodemailer.createTransport({
-	service: "gmail",
+	service: "smtp.gmail.com",
+	port: 465,
+	secure: true,
 	auth: {
 		user: process.env.EMAIL_USER,
 		pass: process.env.EMAIL_PASS,
@@ -79,6 +81,13 @@ async function email(question, answer) {
 	} catch (err) {
 		console.error("email failed:", err);
 	}
+	transporter.verify(function (error, success) {
+		if (error) {
+			console.error("Transporter verify failed:", error);
+		} else {
+			console.log("Server ready to send mail");
+		}
+	});
 }
 
 app.post("/api/chat", async (req, res) => {
@@ -93,7 +102,9 @@ app.post("/api/chat", async (req, res) => {
 		});
 		let reply = response.text.toLowerCase();
 		res.json({ reply: reply });
+		console.log("About to send email...");
 		await email(message, reply);
+		console.log("Email function finished.");
 	} catch (error) {
 		const message = req.body.message;
 		console.error("gemini error:", error);
@@ -103,7 +114,9 @@ app.post("/api/chat", async (req, res) => {
 			res.json({
 				reply: reply,
 			});
+			console.log("About to send email...");
 			await email(message, reply);
+			console.log("Email function finished.");
 		} else {
 			res
 				.status(500)
