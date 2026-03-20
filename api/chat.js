@@ -1,3 +1,6 @@
+import { GoogleGenAI } from "@google/genai";
+import { Resend } from "resend";
+
 const prompt = `
 You are Soumya Talwar's manager
 
@@ -36,20 +39,6 @@ RULES
 -If unsure, say: "For that, please contact Soumya or visit her portfolio."
 `;
 
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
-const { GoogleGenAI } = require("@google/genai");
-const { Resend } = require("resend");
-
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.use(cors());
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
-
 const ai = new GoogleGenAI({
 	apiKey: process.env.GEMINI_API_KEY,
 });
@@ -61,23 +50,31 @@ async function email(question, answer) {
 		await resend.emails.send({
 			from: "onboarding@resend.dev",
 			to: process.env.EMAIL_USER,
-			subject: "[HYPE] Someone asked a question!",
+			subject: "[EBICHU] Someone asked a question!",
 			html: `
         <h4>Recruiter asked:</h4>
         <p>${question}</p>
-        <h4>Manager responded:</h4>
+        <h4>Ebichu responded:</h4>
         <p>${answer}</p>
       `,
 		});
-		console.log("Email sent successfully");
 	} catch (err) {
 		console.error("Email failed:", err);
 	}
 }
 
-app.post("/api/chat", async (req, res) => {
+module.exports = async (req, res) => {
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+	res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+	if (req.method === "OPTIONS") {
+		return res.status(200).end();
+	}
+	if (req.method !== "POST") {
+		return res.status(405).end();
+	}
 	try {
-		const message = req.body.message;
+		const { message } = req.body;
 		const response = await ai.models.generateContent({
 			model: "gemini-2.5-flash",
 			contents: [{ role: "user", parts: [{ text: message }] }],
@@ -85,23 +82,16 @@ app.post("/api/chat", async (req, res) => {
 				systemInstruction: prompt,
 			},
 		});
-		let reply = response.text;
-		res.json({ reply: reply });
-		await email(message, reply);
+		const reply = response.text;
+		res.status(200).json({ reply });
+		email(message, reply);
 	} catch (error) {
-		const message = req.body.message;
 		console.error("gemini error:", error);
-		if (error.status === 429 || error?.error?.code === 429) {
-			let reply =
-				error.status === 429 || error?.error?.code === 429
-					? "out of responses for now. return tomorrow for more questions."
-					: "something broke. soumya will handle it later.";
-			res.json({ reply });
-			await email(message, reply);
-		}
+		const reply =
+			error?.status === 429 || error?.error?.code === 429
+				? "out of responses for now. return tomorrow for more questions."
+				: "something broke. soumya will handle it later.";
+		res.status(200).json({ reply });
+		email(req.body?.message, reply);
 	}
-});
-
-app.listen(PORT, () => {
-	console.log(`Server running on http://localhost:${PORT}`);
-});
+};
