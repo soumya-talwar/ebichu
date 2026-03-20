@@ -1,0 +1,12 @@
+[ JIMIN ]
+Money-plant “husband” that recognizes Soumya and reacts to his mood.
+Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors
+Built in 2022
+
+Jimin is a talking plant husband desktop character powered by an image-classifying model that recognizes Soumya through a webcam. He only responds to her.
+
+His behavior changes with care and environment: affectionate when watered and happy, shy and sleepy when it is dark, and grumpy when the soil is dry.
+
+An extended “Harem” app adds another plant character (a ZZ plant inspired by Kim Seokjin) with its own playful personality and plant-pun style.
+
+The original intent-based NLP approach was later revised to use the OpenAI API, enabling a wider range of moods and conversations.

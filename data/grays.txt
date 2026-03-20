@@ -1,0 +1,10 @@
+[ GRAYS ]
+Mathematical visualization that encodes 128 non-binary genders in a 3D space.
+HTML / CSS / Javascript / X3dom
+Built in 2018
+
+Grays argues that gender identity is not determined by biological sex alone, and explores how real-world variation breaks the “gender binary” assumption.
+
+The project assigns a binary encoding to 128 non-binary gender types and plots them so each identity has mathematical relationships with others.
+
+The visualization frames gender as an expansive field of identities and expressions, not a single linear spectrum.

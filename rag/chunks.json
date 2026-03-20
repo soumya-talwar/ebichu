@@ -1,0 +1,352 @@
+{
+  "version": 1,
+  "createdAt": "2026-03-20T18:44:33.713Z",
+  "chunkCount": 23,
+  "chunks": [
+    {
+      "id": "11-may-c0",
+      "projectSlug": "11-may",
+      "project": "11 MAY",
+      "chunkIndex": 0,
+      "text": "PROJECT: 11 MAY\nSUMMARY: WhatsApp bot that sends hourly birthday compliments to Soumya.\nSTACK: Node.JS / Twilio API / OpenAI API\nYEAR: 2025\n\nThe bot is scheduled on Node.js to ping OpenAI periodically and deliver each generated compliment to WhatsApp via Twilio.",
+      "metadata": {
+        "sourceFile": "11may.txt",
+        "project": "11 MAY",
+        "projectSlug": "11-may",
+        "chunkIndex": 0,
+        "year": "2025",
+        "stack": "Node.JS / Twilio API / OpenAI API"
+      }
+    },
+    {
+      "id": "11-may-c1",
+      "projectSlug": "11-may",
+      "project": "11 MAY",
+      "chunkIndex": 1,
+      "text": "PROJECT: 11 MAY\nSUMMARY: WhatsApp bot that sends hourly birthday compliments to Soumya.\nSTACK: Node.JS / Twilio API / OpenAI API\nYEAR: 2025\n\nContext is provided by reflecting on past wins and pairing them with a few photographs, so the compliments feel sincere and specific.",
+      "metadata": {
+        "sourceFile": "11may.txt",
+        "project": "11 MAY",
+        "projectSlug": "11-may",
+        "chunkIndex": 1,
+        "year": "2025",
+        "stack": "Node.JS / Twilio API / OpenAI API"
+      }
+    },
+    {
+      "id": "11-may-c2",
+      "projectSlug": "11-may",
+      "project": "11 MAY",
+      "chunkIndex": 2,
+      "text": "PROJECT: 11 MAY\nSUMMARY: WhatsApp bot that sends hourly birthday compliments to Soumya.\nSTACK: Node.JS / Twilio API / OpenAI API\nYEAR: 2025\n\nThe implementation is available on GitHub for anyone who wants to build a similar birthday bot.",
+      "metadata": {
+        "sourceFile": "11may.txt",
+        "project": "11 MAY",
+        "projectSlug": "11-may",
+        "chunkIndex": 2,
+        "year": "2025",
+        "stack": "Node.JS / Twilio API / OpenAI API"
+      }
+    },
+    {
+      "id": "doki-doki-c0",
+      "projectSlug": "doki-doki",
+      "project": "DOKI DOKI",
+      "chunkIndex": 0,
+      "text": "PROJECT: DOKI DOKI\nSUMMARY: Otome dating game where correct answers win a date with Soumya.\nSTACK: HTML / CSS / Javascript / Email.JS\nYEAR: 2025\n\nDoki-doki lets players experience a dialogue-based “date” and, when answers are correct, unlock the chance to win a real-life date with Soumya.",
+      "metadata": {
+        "sourceFile": "dokidoki.txt",
+        "project": "DOKI DOKI",
+        "projectSlug": "doki-doki",
+        "chunkIndex": 0,
+        "year": "2025",
+        "stack": "HTML / CSS / Javascript / Email.JS"
+      }
+    },
+    {
+      "id": "doki-doki-c1",
+      "projectSlug": "doki-doki",
+      "project": "DOKI DOKI",
+      "chunkIndex": 1,
+      "text": "PROJECT: DOKI DOKI\nSUMMARY: Otome dating game where correct answers win a date with Soumya.\nSTACK: HTML / CSS / Javascript / Email.JS\nYEAR: 2025\n\nIn this version, the dateable characters are all Soumya’s personas based on the origin of her names and personality shifts.",
+      "metadata": {
+        "sourceFile": "dokidoki.txt",
+        "project": "DOKI DOKI",
+        "projectSlug": "doki-doki",
+        "chunkIndex": 1,
+        "year": "2025",
+        "stack": "HTML / CSS / Javascript / Email.JS"
+      }
+    },
+    {
+      "id": "doki-doki-c2",
+      "projectSlug": "doki-doki",
+      "project": "DOKI DOKI",
+      "chunkIndex": 2,
+      "text": "PROJECT: DOKI DOKI\nSUMMARY: Otome dating game where correct answers win a date with Soumya.\nSTACK: HTML / CSS / Javascript / Email.JS\nYEAR: 2025\n\nProgression happens through conversation; winning routes submit the player’s contact details via email so Soumya can follow up for a real date.",
+      "metadata": {
+        "sourceFile": "dokidoki.txt",
+        "project": "DOKI DOKI",
+        "projectSlug": "doki-doki",
+        "chunkIndex": 2,
+        "year": "2025",
+        "stack": "HTML / CSS / Javascript / Email.JS"
+      }
+    },
+    {
+      "id": "fairy-c0",
+      "projectSlug": "fairy",
+      "project": "FAIRY",
+      "chunkIndex": 0,
+      "text": "PROJECT: FAIRY\nSUMMARY: Mobile app that plays “fairy dust” sparkles when Soumya’s manager is nearby.\nSTACK: Node.JS / Capacitor.JS / Firestore Database\nYEAR: 2025\n\nThe concept started as a “fairy godmother” joke after the manager helped with Soumya’s workload.",
+      "metadata": {
+        "sourceFile": "fairy.txt",
+        "project": "FAIRY",
+        "projectSlug": "fairy",
+        "chunkIndex": 0,
+        "year": "2025",
+        "stack": "Node.JS / Capacitor.JS / Firestore Database"
+      }
+    },
+    {
+      "id": "fairy-c1",
+      "projectSlug": "fairy",
+      "project": "FAIRY",
+      "chunkIndex": 1,
+      "text": "PROJECT: FAIRY\nSUMMARY: Mobile app that plays “fairy dust” sparkles when Soumya’s manager is nearby.\nSTACK: Node.JS / Capacitor.JS / Firestore Database\nYEAR: 2025\n\nThe app stores the manager’s real-time geolocation in Firestore and compares it with Soumya’s location.",
+      "metadata": {
+        "sourceFile": "fairy.txt",
+        "project": "FAIRY",
+        "projectSlug": "fairy",
+        "chunkIndex": 1,
+        "year": "2025",
+        "stack": "Node.JS / Capacitor.JS / Firestore Database"
+      }
+    },
+    {
+      "id": "fairy-c2",
+      "projectSlug": "fairy",
+      "project": "FAIRY",
+      "chunkIndex": 2,
+      "text": "PROJECT: FAIRY\nSUMMARY: Mobile app that plays “fairy dust” sparkles when Soumya’s manager is nearby.\nSTACK: Node.JS / Capacitor.JS / Firestore Database\nYEAR: 2025\n\nWhen the distance is within five meters, it triggers the sparkly fairy-dust sound.",
+      "metadata": {
+        "sourceFile": "fairy.txt",
+        "project": "FAIRY",
+        "projectSlug": "fairy",
+        "chunkIndex": 2,
+        "year": "2025",
+        "stack": "Node.JS / Capacitor.JS / Firestore Database"
+      }
+    },
+    {
+      "id": "grays-c0",
+      "projectSlug": "grays",
+      "project": "GRAYS",
+      "chunkIndex": 0,
+      "text": "PROJECT: GRAYS\nSUMMARY: Mathematical visualization that encodes 128 non-binary genders in a 3D space.\nSTACK: HTML / CSS / Javascript / X3dom\nYEAR: 2018\n\nGrays argues that gender identity is not determined by biological sex alone, and explores how real-world variation breaks the “gender binary” assumption.",
+      "metadata": {
+        "sourceFile": "grays.txt",
+        "project": "GRAYS",
+        "projectSlug": "grays",
+        "chunkIndex": 0,
+        "year": "2018",
+        "stack": "HTML / CSS / Javascript / X3dom"
+      }
+    },
+    {
+      "id": "grays-c1",
+      "projectSlug": "grays",
+      "project": "GRAYS",
+      "chunkIndex": 1,
+      "text": "PROJECT: GRAYS\nSUMMARY: Mathematical visualization that encodes 128 non-binary genders in a 3D space.\nSTACK: HTML / CSS / Javascript / X3dom\nYEAR: 2018\n\nThe project assigns a binary encoding to 128 non-binary gender types and plots them so each identity has mathematical relationships with others.",
+      "metadata": {
+        "sourceFile": "grays.txt",
+        "project": "GRAYS",
+        "projectSlug": "grays",
+        "chunkIndex": 1,
+        "year": "2018",
+        "stack": "HTML / CSS / Javascript / X3dom"
+      }
+    },
+    {
+      "id": "grays-c2",
+      "projectSlug": "grays",
+      "project": "GRAYS",
+      "chunkIndex": 2,
+      "text": "PROJECT: GRAYS\nSUMMARY: Mathematical visualization that encodes 128 non-binary genders in a 3D space.\nSTACK: HTML / CSS / Javascript / X3dom\nYEAR: 2018\n\nThe visualization frames gender as an expansive field of identities and expressions, not a single linear spectrum.",
+      "metadata": {
+        "sourceFile": "grays.txt",
+        "project": "GRAYS",
+        "projectSlug": "grays",
+        "chunkIndex": 2,
+        "year": "2018",
+        "stack": "HTML / CSS / Javascript / X3dom"
+      }
+    },
+    {
+      "id": "hominidae-c0",
+      "projectSlug": "hominidae",
+      "project": "HOMINIDAE",
+      "chunkIndex": 0,
+      "text": "PROJECT: HOMINIDAE\nSUMMARY: Interactive series of autonomous artworks that model sexual aggression in great apes.\nSTACK: HTML / CSS / Javascript / P5.JS\nYEAR: 2020\n\nHominidae simulates different forms of sexual violence and aggression observed in great apes through interactive, autonomous visuals.",
+      "metadata": {
+        "sourceFile": "hominidae.txt",
+        "project": "HOMINIDAE",
+        "projectSlug": "hominidae",
+        "chunkIndex": 0,
+        "year": "2020",
+        "stack": "HTML / CSS / Javascript / P5.JS"
+      }
+    },
+    {
+      "id": "hominidae-c1",
+      "projectSlug": "hominidae",
+      "project": "HOMINIDAE",
+      "chunkIndex": 1,
+      "text": "PROJECT: HOMINIDAE\nSUMMARY: Interactive series of autonomous artworks that model sexual aggression in great apes.\nSTACK: HTML / CSS / Javascript / P5.JS\nYEAR: 2020\n\nThe work does not endorse sexual violence; it treats “natural” explanations as insufficient and frames coercion and inequality as problems worth examining.",
+      "metadata": {
+        "sourceFile": "hominidae.txt",
+        "project": "HOMINIDAE",
+        "projectSlug": "hominidae",
+        "chunkIndex": 1,
+        "year": "2020",
+        "stack": "HTML / CSS / Javascript / P5.JS"
+      }
+    },
+    {
+      "id": "hominidae-c2",
+      "projectSlug": "hominidae",
+      "project": "HOMINIDAE",
+      "chunkIndex": 2,
+      "text": "PROJECT: HOMINIDAE\nSUMMARY: Interactive series of autonomous artworks that model sexual aggression in great apes.\nSTACK: HTML / CSS / Javascript / P5.JS\nYEAR: 2020\n\nEvolutionary and dominance-based mating strategies are used as framing to show how aggression can escalate across generations.",
+      "metadata": {
+        "sourceFile": "hominidae.txt",
+        "project": "HOMINIDAE",
+        "projectSlug": "hominidae",
+        "chunkIndex": 2,
+        "year": "2020",
+        "stack": "HTML / CSS / Javascript / P5.JS"
+      }
+    },
+    {
+      "id": "jimin-c0",
+      "projectSlug": "jimin",
+      "project": "JIMIN",
+      "chunkIndex": 0,
+      "text": "PROJECT: JIMIN\nSUMMARY: Money-plant “husband” that recognizes Soumya and reacts to his mood.\nSTACK: Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors\nYEAR: 2022\n\nJimin is a talking plant husband desktop character powered by an image-classifying model that recognizes Soumya through a webcam. He only responds to her.",
+      "metadata": {
+        "sourceFile": "jimin.txt",
+        "project": "JIMIN",
+        "projectSlug": "jimin",
+        "chunkIndex": 0,
+        "year": "2022",
+        "stack": "Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors"
+      }
+    },
+    {
+      "id": "jimin-c1",
+      "projectSlug": "jimin",
+      "project": "JIMIN",
+      "chunkIndex": 1,
+      "text": "PROJECT: JIMIN\nSUMMARY: Money-plant “husband” that recognizes Soumya and reacts to his mood.\nSTACK: Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors\nYEAR: 2022\n\nHis behavior changes with care and environment: affectionate when watered and happy, shy and sleepy when it is dark, and grumpy when the soil is dry.",
+      "metadata": {
+        "sourceFile": "jimin.txt",
+        "project": "JIMIN",
+        "projectSlug": "jimin",
+        "chunkIndex": 1,
+        "year": "2022",
+        "stack": "Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors"
+      }
+    },
+    {
+      "id": "jimin-c2",
+      "projectSlug": "jimin",
+      "project": "JIMIN",
+      "chunkIndex": 2,
+      "text": "PROJECT: JIMIN\nSUMMARY: Money-plant “husband” that recognizes Soumya and reacts to his mood.\nSTACK: Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors\nYEAR: 2022\n\nAn extended “Harem” app adds another plant character (a ZZ plant inspired by Kim Seokjin) with its own playful personality and plant-pun style.",
+      "metadata": {
+        "sourceFile": "jimin.txt",
+        "project": "JIMIN",
+        "projectSlug": "jimin",
+        "chunkIndex": 2,
+        "year": "2022",
+        "stack": "Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors"
+      }
+    },
+    {
+      "id": "jimin-c3",
+      "projectSlug": "jimin",
+      "project": "JIMIN",
+      "chunkIndex": 3,
+      "text": "PROJECT: JIMIN\nSUMMARY: Money-plant “husband” that recognizes Soumya and reacts to his mood.\nSTACK: Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors\nYEAR: 2022\n\nThe original intent-based NLP approach was later revised to use the OpenAI API, enabling a wider range of moods and conversations.",
+      "metadata": {
+        "sourceFile": "jimin.txt",
+        "project": "JIMIN",
+        "projectSlug": "jimin",
+        "chunkIndex": 3,
+        "year": "2022",
+        "stack": "Node.JS / Electron / Google Teachable Machine / ML5.JS / Socket.IO / OpenAI API / Arduino UNO / Various sensors"
+      }
+    },
+    {
+      "id": "taegificbot-c0",
+      "projectSlug": "taegificbot",
+      "project": "@TAEGIFICBOT",
+      "chunkIndex": 0,
+      "text": "PROJECT: @TAEGIFICBOT\nSUMMARY: Twitter bot that replies with custom BTS fanfiction recommendations when tagged.\nSTACK: Node.JS / Twitter API / Google Sheets / Axios / Cheerio / Firestore Database / Heroku\nYEAR: 2020\n\n@taegificbot was created to make it faster to find queer BTS fanfiction and recommend stories to Twitter users.",
+      "metadata": {
+        "sourceFile": "taegificbot.txt",
+        "project": "@TAEGIFICBOT",
+        "projectSlug": "taegificbot",
+        "chunkIndex": 0,
+        "year": "2020",
+        "stack": "Node.JS / Twitter API / Google Sheets / Axios / Cheerio / Firestore Database / Heroku"
+      }
+    },
+    {
+      "id": "taegificbot-c1",
+      "projectSlug": "taegificbot",
+      "project": "@TAEGIFICBOT",
+      "chunkIndex": 1,
+      "text": "PROJECT: @TAEGIFICBOT\nSUMMARY: Twitter bot that replies with custom BTS fanfiction recommendations when tagged.\nSTACK: Node.JS / Twitter API / Google Sheets / Axios / Cheerio / Firestore Database / Heroku\nYEAR: 2020\n\nA web scraper collects story metadata (since AO3 has no public API) and stores it in Firebase/Firestore after the initial spreadsheet of links is prepared.",
+      "metadata": {
+        "sourceFile": "taegificbot.txt",
+        "project": "@TAEGIFICBOT",
+        "projectSlug": "taegificbot",
+        "chunkIndex": 1,
+        "year": "2020",
+        "stack": "Node.JS / Twitter API / Google Sheets / Axios / Cheerio / Firestore Database / Heroku"
+      }
+    },
+    {
+      "id": "taegificbot-c2",
+      "projectSlug": "taegificbot",
+      "project": "@TAEGIFICBOT",
+      "chunkIndex": 2,
+      "text": "PROJECT: @TAEGIFICBOT\nSUMMARY: Twitter bot that replies with custom BTS fanfiction recommendations when tagged.\nSTACK: Node.JS / Twitter API / Google Sheets / Axios / Cheerio / Firestore Database / Heroku\nYEAR: 2020\n\nA Twitter bot responds to mentions, supports filtering by length/genre/pairings/tropes/completion status and can avoid stories with specified trigger warnings; it also provides daily recommendations. The bot is no longer active, but the code remains available.",
+      "metadata": {
+        "sourceFile": "taegificbot.txt",
+        "project": "@TAEGIFICBOT",
+        "projectSlug": "taegificbot",
+        "chunkIndex": 2,
+        "year": "2020",
+        "stack": "Node.JS / Twitter API / Google Sheets / Axios / Cheerio / Firestore Database / Heroku"
+      }
+    },
+    {
+      "id": "zombie-c0",
+      "projectSlug": "zombie",
+      "project": "ZOMBIE",
+      "chunkIndex": 0,
+      "text": "PROJECT: ZOMBIE\nSUMMARY: Twitter bot that continues posting from Soumya’s account after she’s “gone”.\nSTACK: Node.JS / Twitter API\nYEAR: 2021\n\nAn updated version is in development.",
+      "metadata": {
+        "sourceFile": "zombie.txt",
+        "project": "ZOMBIE",
+        "projectSlug": "zombie",
+        "chunkIndex": 0,
+        "year": "2021",
+        "stack": "Node.JS / Twitter API"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[ FAIRY ]
+Mobile app that plays “fairy dust” sparkles when Soumya’s manager is nearby.
+Node.JS / Capacitor.JS / Firestore Database
+Built in 2025
+
+The concept started as a “fairy godmother” joke after the manager helped with Soumya’s workload.
+
+The app stores the manager’s real-time geolocation in Firestore and compares it with Soumya’s location.
+
+When the distance is within five meters, it triggers the sparkly fairy-dust sound.

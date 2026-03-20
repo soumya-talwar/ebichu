@@ -2,19 +2,16 @@
 	"name": "ebichu",
 	"version": "1.0.0",
 	"type": "module",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "node index.js"
-	},
+	"main": "api/chat.js",
 	"author": "soumya talwar",
 	"license": "ISC",
 	"description": "",
+	"scripts": {
+		"rag:build-chunks": "node scripts/build-rag-chunks.js",
+		"rag:embed": "node scripts/embed-rag-chunks.js"
+	},
 	"dependencies": {
 		"@google/genai": "^1.42.0",
-		"cors": "^2.8.6",
-		"dotenv": "^17.3.1",
-		"express": "^5.2.1",
 		"resend": "^6.9.2"
 	}
 }

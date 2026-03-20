@@ -1,0 +1,7 @@
+[ ZOMBIE ]
+Twitter bot that continues posting from Soumya’s account after she’s “gone”.
+Node.JS / Twitter API
+Built in 2021
+Temporarily unavailable
+
+An updated version is in development.

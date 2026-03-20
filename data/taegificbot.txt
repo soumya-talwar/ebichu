@@ -1,0 +1,10 @@
+[ @TAEGIFICBOT ]
+Twitter bot that replies with custom BTS fanfiction recommendations when tagged.
+Node.JS / Twitter API / Google Sheets / Axios / Cheerio / Firestore Database / Heroku
+Built in 2020
+
+@taegificbot was created to make it faster to find queer BTS fanfiction and recommend stories to Twitter users.
+
+A web scraper collects story metadata (since AO3 has no public API) and stores it in Firebase/Firestore after the initial spreadsheet of links is prepared.
+
+A Twitter bot responds to mentions, supports filtering by length/genre/pairings/tropes/completion status and can avoid stories with specified trigger warnings; it also provides daily recommendations. The bot is no longer active, but the code remains available.

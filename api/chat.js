@@ -1,11 +1,13 @@
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import { GoogleGenAI } from "@google/genai";
 import { Resend } from "resend";
 
-const prompt = `
+const baseSystemInstruction = `
 You are Soumya Talwar's manager
 
 ABOUT SOUMYA
-
 Sr Art Director (pivoting to Creative Technologist)
 
 Strengths:
@@ -13,17 +15,7 @@ Strengths:
 -Concept-first product thinking
 -Bridges design and engineering
 
-Projects (in ranking):
--Jimin: AI plant husband using image recognition + sensor-based mood modeling
--Doki-doki: Otome dating game, winners get to win a date with her
--Taegificbot: Queer BTS fanfic Twitter recommendation bot
--11 May: Whatsapp bot delivering hourly birthday compliments
--Fairy: App plays fairydust sound when her manager is within 5m
--Grays: 128 non-binary genders encoded in 3D mathematical space
--Hominidae: Autonomous artworks modeling sexual violence in great apes
-
 YOUR PERSONALITY
-
 -Smug, sassy, witty, sharply confident
 -Direct, declarative, never flowery
 -Playful, little dramatic
@@ -39,11 +31,154 @@ RULES
 -If unsure, say: "For that, please contact Soumya or visit her portfolio."
 `;
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const RAG_CHUNKS_PATH = path.join(__dirname, "..", "rag", "chunks.json");
+const RAG_EMBEDDINGS_PATH = path.join(__dirname, "..", "rag", "embeddings.json");
+
+let ragIndexPromise = null;
+
+function buildSystemInstruction(retrievedChunks) {
+	const contextText =
+		retrievedChunks?.length > 0
+			? retrievedChunks
+					.map((chunk, idx) => `[${idx + 1}] ${chunk}`)
+					.join("\n")
+			: "No relevant project context found.";
+
+	return `${baseSystemInstruction}
+	
+	PROJECT CONTEXT (use this to answer questions about Soumya's projects):
+	${contextText}
+
+	Answer using only the retrieved project context above (do not invent details).`;
+}
+
 const ai = new GoogleGenAI({
 	apiKey: process.env.GEMINI_API_KEY,
 });
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+async function embedQuery(text) {
+	try {
+		const response = await ai.models.embedContent({
+			model: process.env.GEMINI_EMBEDDING_MODEL || "gemini-embedding-001",
+			contents: text,
+			config: {
+				taskType: "RETRIEVAL_QUERY",
+			},
+		});
+		return response?.embeddings?.[0]?.values ?? null;
+	} catch {
+		return null;
+	}
+}
+
+function cosineScore(queryEmbedding, docEmbedding, queryNorm, docNorm) {
+	const len = Math.min(queryEmbedding.length, docEmbedding.length);
+	let dot = 0;
+	for (let i = 0; i < len; i++) {
+		dot += queryEmbedding[i] * docEmbedding[i];
+	}
+	const denom = queryNorm * docNorm;
+	if (!denom) return -Infinity;
+	return dot / denom;
+}
+
+function cosineNorm(vec) {
+	let sumSq = 0;
+	for (const v of vec) sumSq += v * v;
+	return Math.sqrt(sumSq);
+}
+
+async function loadRagIndex() {
+	if (ragIndexPromise) return ragIndexPromise;
+
+	ragIndexPromise = (async () => {
+		if (!fs.existsSync(RAG_CHUNKS_PATH)) {
+			throw new Error(`Missing ${RAG_CHUNKS_PATH}. Run 'npm run rag:build-chunks'.`);
+		}
+
+		const chunksRaw = JSON.parse(fs.readFileSync(RAG_CHUNKS_PATH, "utf8"));
+		const chunks = chunksRaw.chunks ?? [];
+
+		if (fs.existsSync(RAG_EMBEDDINGS_PATH)) {
+			const embeddingsRaw = JSON.parse(
+				fs.readFileSync(RAG_EMBEDDINGS_PATH, "utf8")
+			);
+			const items = embeddingsRaw.items ?? [];
+			const itemsById = new Map(items.map((it) => [it.id, it]));
+			const indexItems = [];
+			for (const c of chunks) {
+				const it = itemsById.get(c.id);
+				if (it?.embedding && Array.isArray(it.embedding)) {
+					indexItems.push({
+						id: it.id,
+						projectSlug: c.projectSlug,
+						text: c.text,
+						embedding: it.embedding,
+						norm: typeof it.norm === "number" ? it.norm : cosineNorm(it.embedding),
+					});
+				}
+			}
+			return { chunks, items: indexItems };
+		}
+
+		const embeddingModel =
+			process.env.GEMINI_EMBEDDING_MODEL || "gemini-embedding-001";
+		const texts = chunks.map((c) => c.text);
+		const response = await ai.models.embedContent({
+			model: embeddingModel,
+			contents: texts,
+			config: { taskType: "RETRIEVAL_DOCUMENT" },
+		});
+
+		const embeddings = response?.embeddings ?? [];
+		const items = [];
+		for (let i = 0; i < chunks.length; i++) {
+			const embedding = embeddings?.[i]?.values;
+			if (!embedding) continue;
+			items.push({
+				id: chunks[i].id,
+				projectSlug: chunks[i].projectSlug,
+				text: chunks[i].text,
+				embedding,
+				norm: cosineNorm(embedding),
+			});
+		}
+
+		return { chunks, items };
+	})();
+
+	return ragIndexPromise;
+}
+
+async function retrieveProjectContext({ queryEmbedding, nResults = 3 }) {
+	if (!Array.isArray(queryEmbedding) || queryEmbedding.length === 0) {
+		if (fs.existsSync(RAG_CHUNKS_PATH)) {
+			const chunksRaw = JSON.parse(fs.readFileSync(RAG_CHUNKS_PATH, "utf8"));
+			const chunks = chunksRaw.chunks ?? [];
+			return chunks.slice(0, nResults).map((c) => c.text);
+		}
+		return [];
+	}
+
+	const { items } = await loadRagIndex();
+	if (!items.length) return [];
+
+	const queryNorm = cosineNorm(queryEmbedding);
+	const scored = items
+		.map((it) => ({
+			text: it.text,
+			score: cosineScore(queryEmbedding, it.embedding, queryNorm, it.norm),
+		}))
+		.sort((a, b) => b.score - a.score)
+		.slice(0, Math.max(1, nResults));
+
+	return scored.map((s) => s.text);
+}
 
 async function email(question, answer) {
 	try {
@@ -64,22 +199,22 @@ async function email(question, answer) {
 }
 
 export default async function handler(req, res) {
-	res.setHeader("Access-Control-Allow-Origin", "*");
-	res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-	res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-	if (req.method === "OPTIONS") {
-		return res.status(200).end();
-	}
 	if (req.method !== "POST") {
 		return res.status(405).end();
 	}
 	try {
 		const { message } = req.body;
+
+		const queryEmbedding = await embedQuery(message);
+		const retrievedChunks = await retrieveProjectContext({ queryEmbedding, nResults: 3 });
+
+		const systemInstruction = buildSystemInstruction(retrievedChunks);
+
 		const response = await ai.models.generateContent({
 			model: "gemini-2.5-flash",
 			contents: [{ role: "user", parts: [{ text: message }] }],
 			config: {
-				systemInstruction: prompt,
+				systemInstruction,
 			},
 		});
 		const reply = response.text;

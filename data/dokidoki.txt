@@ -1,0 +1,10 @@
+[ DOKI DOKI ]
+Otome dating game where correct answers win a date with Soumya.
+HTML / CSS / Javascript / Email.JS
+Built in 2025
+
+Doki-doki lets players experience a dialogue-based “date” and, when answers are correct, unlock the chance to win a real-life date with Soumya.
+
+In this version, the dateable characters are all Soumya’s personas based on the origin of her names and personality shifts.
+
+Progression happens through conversation; winning routes submit the player’s contact details via email so Soumya can follow up for a real date.

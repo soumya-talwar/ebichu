@@ -1,0 +1,10 @@
+[ HOMINIDAE ]
+Interactive series of autonomous artworks that model sexual aggression in great apes.
+HTML / CSS / Javascript / P5.JS
+Built in 2020
+
+Hominidae simulates different forms of sexual violence and aggression observed in great apes through interactive, autonomous visuals.
+
+The work does not endorse sexual violence; it treats “natural” explanations as insufficient and frames coercion and inequality as problems worth examining.
+
+Evolutionary and dominance-based mating strategies are used as framing to show how aggression can escalate across generations.

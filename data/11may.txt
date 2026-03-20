@@ -1,0 +1,10 @@
+[ 11 MAY ]
+WhatsApp bot that sends hourly birthday compliments to Soumya.
+Node.JS / Twilio API / OpenAI API
+Built in 2025
+
+The bot is scheduled on Node.js to ping OpenAI periodically and deliver each generated compliment to WhatsApp via Twilio.
+
+Context is provided by reflecting on past wins and pairing them with a few photographs, so the compliments feel sincere and specific.
+
+The implementation is available on GitHub for anyone who wants to build a similar birthday bot.
