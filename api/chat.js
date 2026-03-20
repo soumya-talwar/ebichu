@@ -63,7 +63,7 @@ async function email(question, answer) {
 	}
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
 	res.setHeader("Access-Control-Allow-Origin", "*");
 	res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
 	res.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -94,4 +94,4 @@ module.exports = async (req, res) => {
 		res.status(200).json({ reply });
 		email(req.body?.message, reply);
 	}
-};
+}
